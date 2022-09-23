@@ -85,7 +85,6 @@ export class AddPersonComponent implements OnInit {
     }
 
     onPickSocialMediaAccount(socialMediaAccount: SocialMediaAccount) {
-        console.log("aaa");
         const dialogRef = this.dialog.open(DialogModalComponent, {
             width: '250px',
             hasBackdrop: true,
