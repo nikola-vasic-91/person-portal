@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AddPersonComponent } from './components/add-person/add-person.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { PersonDetailComponent } from './components/person-detail/person-detail.component';
 import { PersonComponent } from './components/person/person.component';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -30,7 +29,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     PersonDetailComponent,
     AddPersonComponent,
     PersonComponent,
