@@ -1,0 +1,11 @@
+<h4 mat-dialog-title [translate]="'dialog-modal.dialog-title'" [translateParams]="{type: data.type}"></h4>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'dialog-modal.address' | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.address">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="display: inline-block;">  
+  <button mat-button [mat-dialog-close]="null" cdkFocusInitial>{{ 'dialog-modal.cancel' | translate }}</button>
+  <button mat-button [mat-dialog-close]="data.address" cdkFocusInitial [disabled]="!data.address">{{ 'dialog-modal.add-address' | translate }}</button>
+</div>

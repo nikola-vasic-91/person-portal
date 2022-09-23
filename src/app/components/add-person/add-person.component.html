@@ -1,0 +1,115 @@
+<form [formGroup]="addPersonForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <h3>{{ 'add-person.person-details' | translate }}</h3>
+    <label class="form-group" style="display: block">
+        <div class="col-md-10">
+          <input class="form-control" id="firstName" type="text" formControlName="firstName" placeholder="{{ 'add-person.first-name' | translate }}"/>
+        </div>
+    </label>
+    <div *ngIf="firstName && firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+        <div *ngIf="firstName.errors?.['required']">
+            {{ 'add-person.first-name' | translate }} {{ 'add-person.field-required' | translate }}
+        </div>
+        <div *ngIf="firstName.errors?.['minlength']">
+            {{ 'add-person.first-name' | translate }} {{ 'add-person.field-characters' | translate }}
+        </div>
+        <div *ngIf="firstName.errors?.['pattern']">
+            {{ 'add-person.first-name' | translate }} {{ 'add-person.only-letters-allowed' | translate }}
+        </div>
+    </div>
+
+    <label class="form-group" style="display: block">
+        <div class="col-md-10">
+          <input class="form-control" id="lastName" type="text" formControlName="lastName" placeholder="{{ 'add-person.last-name' | translate }}"/>
+        </div>
+    </label>
+    <div *ngIf="lastName && lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+        <div *ngIf="lastName.errors?.['required']">
+            {{ 'add-person.last-name' | translate }} {{ 'add-person.field-required' | translate }}
+        </div>
+        <div *ngIf="lastName.errors?.['minlength']">
+            {{ 'add-person.last-name' | translate }} {{ 'add-person.field-characters' | translate }}
+        </div>
+        <div *ngIf="lastName.errors?.['pattern']">
+            {{ 'add-person.first-name' | translate }} {{ 'add-person.only-letters-allowed' | translate }}
+        </div>
+    </div>
+  
+    <label class="form-group" style="display: block">
+        <div class="col-md-10">
+            <input class="form-control" id="socialSkill" type="text" formControlName="socialSkill" placeholder="{{ 'add-person.social-skill' | translate }}"/>
+        </div>
+    </label>
+    <div *ngIf="socialSkill && socialSkill.invalid && (socialSkill.dirty || socialSkill.touched)" class="alert alert-danger">
+        <div *ngIf="socialSkill.errors?.['required']">
+            {{ 'add-person.social-skill' | translate }} {{ 'add-person.field-required' | translate }}
+        </div>
+        <div *ngIf="socialSkill.errors?.['minlength']">
+            {{ 'add-person.social-skill' | translate }} {{ 'add-person.field-characters' | translate }}
+        </div>
+    </div>
+
+    <span>
+        <button class="btn btn-default" type="button" (click)="onAddSocialSkill()" [disabled]="socialSkill && !socialSkill.valid">{{ 'add-person.add-social-skill' | translate }}</button>
+    </span>
+
+    <br><br><h6 *ngFor="let socialSkill of socialSkills" class="pt-4" >
+            <div class="btn-group" role="group">
+            <label class="btn d-flex align-items-center bg-info px-3 mb-0">
+                <span class="px-1 mb-0">{{socialSkill}}</span>
+            </label>
+            <button class="btn btn-default" type="button" (click)="onDeleteSocialSkill(socialSkill)">{{ 'add-person.remove-social-skill' | translate }}</button>
+        </div>
+    </h6>
+
+    <h3>{{ 'add-person.social-media-accounts' | translate }}</h3>
+
+    <span *ngFor="let socialMediaAccount of socialMediaAccounts" style="margin: 2px;">
+        <button class="btn btn-default" type="button" type="button" (click)="onPickSocialMediaAccount(socialMediaAccount)">{{socialMediaAccount.type}}</button>
+    </span>
+
+    <br><br><label class="form-group" style="display: block">
+        <div class="col-md-10">
+            <input class="form-control" id="socialMediaAccountType" type="text" formControlName="socialMediaAccountType" placeholder="{{ 'add-person.account-type' | translate }}"/>
+        </div>
+    </label>
+    <div *ngIf="socialMediaAccountType && socialMediaAccountType.invalid && (socialMediaAccountType.dirty || socialMediaAccountType.touched)" class="alert alert-danger">
+        <div *ngIf="socialMediaAccountType.errors?.['required']">
+            {{ 'add-person.account-type' | translate }} {{ 'add-person.field-required' | translate }}
+        </div>
+        <div *ngIf="socialMediaAccountType.errors?.['minlength']">
+            {{ 'add-person.account-type' | translate }} {{ 'add-person.field-characters' | translate }}
+        </div>
+    </div>
+
+    <label class="form-group" style="display: block">
+        <div class="col-md-10">
+            <input class="form-control" id="socialMediaAccountAddress" type="text" formControlName="socialMediaAccountAddress" placeholder="{{ 'add-person.account-address' | translate }}"/>
+        </div>
+    </label>
+    <div *ngIf="socialMediaAccountAddress && socialMediaAccountAddress.invalid && (socialMediaAccountAddress.dirty || socialMediaAccountAddress.touched)" class="alert alert-danger">
+        <div *ngIf="socialMediaAccountAddress.errors?.['required']">
+            {{ 'add-person.account-address' | translate }} {{ 'add-person.field-required' | translate }}
+        </div>
+        <div *ngIf="socialMediaAccountAddress.errors?.['minlength']">
+            {{ 'add-person.account-address' | translate }} {{ 'add-person.field-characters' | translate }}
+        </div>
+    </div>
+
+    <span>
+        <button class="btn btn-default" type="button" (click)="onAddSocialMediaAccount()" [disabled]="(socialMediaAccountType && !socialMediaAccountType.valid) || (socialMediaAccountAddress && !socialMediaAccountAddress.valid)">{{ 'add-person.add-social-media-account' | translate }}</button>
+    </span>
+
+    <br><br><h6 *ngFor="let personSocialMediaAccount of personSocialMediaAccounts" class="pt-4" >
+        <div class="btn-group" role="group">
+            <label class="btn d-flex align-items-center bg-info px-3 mb-0">
+                <span class="px-1 mb-0">{{personSocialMediaAccount.type}}</span>
+            </label>
+            <label class="btn d-flex align-items-center bg-info px-3 mb-0">
+                <span class="px-1 mb-0">{{personSocialMediaAccount.address}}</span>
+            </label>
+            <button class="btn btn-default" type="button" (click)="onDeleteSocialMediaAccount(personSocialMediaAccount)">{{ 'add-person.remove-social-media-account' | translate }}</button>
+        </div>
+    </h6>
+  
+    <button class="btn btn-default" [disabled]="(firstName && !firstName.valid) || (lastName && !lastName.valid) || (socialSkills && socialSkills.length == 0) || (personSocialMediaAccounts && personSocialMediaAccounts.length == 0)">{{ 'add-person.add-person' | translate }}</button>
+  </form>
