@@ -1,0 +1,33 @@
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="filterValue" (change)="applyFilter()">
+    <option value="">Svi kupci</option>
+    <option *ngFor="let kupacValue of availableKupacValues" [value]="kupacValue">{{ kupacValue }}</option>
+  </select>
+
+  <br><br>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Kupac</th>
+        <th scope="col">Tip akcije</th>
+        <th scope="col">Brend</th>
+        <th scope="col">Sifra artikla</th>
+        <th scope="col">Artikal</th>
+        <th scope="col">Cijena</th>
+        <th scope="col">Pocetak akcije</th>
+        <th scope="col">Kraj akcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let akcija of filteredData">
+        <th scope="row">{{ akcija.kupac }}</th>
+        <td>{{ akcija.tipAkcije }}</td>
+        <td>{{ akcija.brend }}</td>
+        <td>{{ akcija.sifArt }}</td>
+        <td>{{ akcija.artikal }}</td>
+        <td>{{ akcija.cijena }}</td>
+        <td>{{ akcija.pocetakAkcije | date:'dd-MM-yyyy'}}</td>
+        <td>{{ akcija.krajAkcije | date:'dd-MM-yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>

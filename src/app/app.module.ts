@@ -24,6 +24,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { HttpRequestInterceptor } from './shared/http-request.interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AkcijaComponent } from './components/akcija/akcija.component';
+import { AzurirajAkcijuComponent } from './components/azuriraj-akciju/azuriraj-akciju.component';
+import { NeltService } from './shared/nelt-service.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     PersonComponent,
     DialogModalComponent,
     PersonListComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AkcijaComponent,
+    AzurirajAkcijuComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       }
   })
   ],
-  providers: [PersonService,
+  providers: [PersonService,NeltService,
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}
     },
