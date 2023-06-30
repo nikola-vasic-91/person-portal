@@ -18,7 +18,7 @@ export class PersonService {
   constructor(private http: HttpClient, private toast: NgToastService) { }
 
   getPersons() {
-    return this.http.get<Array<Person>>('' + this.personEndpoint)
+    return this.http.get<Array<Person>>(environment.personServiceUrl + this.personEndpoint)
         .pipe(
             catchError((err) => {
                 this.toast.error({detail:"", summary:err.error, position:'br', duration: 5000});
@@ -28,7 +28,7 @@ export class PersonService {
   }
 
   getSocialMediaAccounts() {
-    return this.http.get<Array<SocialMediaAccount>>('' + this.socialMediaAccountEndpoint)
+    return this.http.get<Array<SocialMediaAccount>>(environment.personServiceUrl + this.socialMediaAccountEndpoint)
         .pipe(
             catchError((err) => {
                 this.toast.error({detail:"", summary:err.error, position:'br', duration: 5000});
@@ -38,7 +38,7 @@ export class PersonService {
   }
 
   getPerson(personId: string) {
-    return this.http.get<Person>('' + this.personEndpoint + '/' + personId)
+    return this.http.get<Person>(environment.personServiceUrl + this.personEndpoint + '/' + personId)
         .pipe(
             catchError((err) => {
                 this.toast.error({detail:"", summary:err.error, position:'br', duration: 5000});
@@ -48,7 +48,7 @@ export class PersonService {
   }
 
   getModifiedPersonData(personId: string) {
-    return this.http.get<ModifiedPerson>('' + this.personEndpoint + '/' + personId + this.modifiedUrlPart)
+    return this.http.get<ModifiedPerson>(environment.personServiceUrl + this.personEndpoint + '/' + personId + this.modifiedUrlPart)
         .pipe(
             catchError((err) => {
                 this.toast.error({detail:"", summary:err.error, position:'br', duration: 5000});
@@ -58,7 +58,7 @@ export class PersonService {
   }
 
   addPerson(person: Person): Observable<string> {
-    return this.http.post<string>('' + this.personEndpoint, person)
+    return this.http.post<string>(environment.personServiceUrl + this.personEndpoint, person)
         .pipe(
             catchError((err) => {
                 this.toast.error({detail:"", summary:err.error, position:'br', duration: 5000});
