@@ -1,0 +1,14 @@
+<div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Korisnicko ime</span>
+    </div>
+    <input [(ngModel)]="username" type="text" class="form-control" aria-label="Korisnicko ime" aria-describedby="inputGroup-sizing-sm">
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Lozinka</span>
+    </div>
+    <input [(ngModel)]="password" type="password" class="form-control" aria-label="Lozinka" aria-describedby="inputGroup-sizing-sm">
+  </div>
+<p style="color: red;">{{error}}</p>
+<button class="btn btn-primary" (click)="submit()">Prijava</button>

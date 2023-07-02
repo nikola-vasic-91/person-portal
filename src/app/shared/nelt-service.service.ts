@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -8,11 +8,19 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class NeltService {
+  navchange: EventEmitter<boolean> = new EventEmitter();
 
   getAkcijeUrl: string = "https://nelt-function.azurewebsites.net/api/GetAkcije";
   excelUploadUrl: string = "https://nelt-function.azurewebsites.net/api/ExcelUploadFunction";
 
   constructor(private http: HttpClient, private toast: NgToastService, private router: Router) { }
+
+  emitNavChangeEvent(boolean:boolean) {
+    this.navchange.emit(boolean);
+  }
+  getNavChangeEmitter() {
+    return this.navchange;
+  }
 
   getAkcije() {
     return this.http.get<Array<Akcija>>(this.getAkcijeUrl)
@@ -41,4 +49,6 @@ export class NeltService {
         return of('');
       }
   }
+
+  
 }

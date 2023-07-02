@@ -27,6 +27,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AkcijaComponent } from './components/akcija/akcija.component';
 import { AzurirajAkcijuComponent } from './components/azuriraj-akciju/azuriraj-akciju.component';
 import { NeltService } from './shared/nelt-service.service';
+import { PopupComponent } from './components/popup/popup.component';
+import { Guard } from './shared/guard';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { NeltService } from './shared/nelt-service.service';
     PersonListComponent,
     SpinnerComponent,
     AkcijaComponent,
-    AzurirajAkcijuComponent
+    AzurirajAkcijuComponent,
+    
+PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,7 @@ import { NeltService } from './shared/nelt-service.service';
       }
   })
   ],
-  providers: [PersonService,NeltService,
+  providers: [PersonService,NeltService,Guard,
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}
     },
