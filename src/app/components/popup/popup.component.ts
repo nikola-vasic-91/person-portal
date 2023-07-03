@@ -18,7 +18,7 @@ export class PopupComponent implements OnInit {
   }
 
   submit() {
-    if (this.username == "neltakcije" && this.password == "AkcijePass9082") {
+    if (this.username == "neltakcije" && this.password == "Sinergija2023.") {
       localStorage.setItem('auth','akcije')
       this.router.navigate(['/akcije']);
       this.service.emitNavChangeEvent(true);
