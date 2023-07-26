@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PersonListComponent } from "./components/person-list/person-list.component";
-import { PersonComponent } from "./components/person/person.component";
 import { Guard } from "./shared/guard";
 import { AkcijaComponent } from "./components/akcija/akcija.component";
 import { AzurirajAkcijuComponent } from "./components/azuriraj-akciju/azuriraj-akciju.component";
