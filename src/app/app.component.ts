@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from './components/popup/popup.component';
 
@@ -9,8 +8,7 @@ import { PopupComponent } from './components/popup/popup.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private translate: TranslateService, private dialog: MatDialog) {
-    translate.setDefaultLang('en');
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
