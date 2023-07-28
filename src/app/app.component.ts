@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from './components/popup/popup.component';
+import { AuthService } from './shared/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,21 @@ import { PopupComponent } from './components/popup/popup.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    const item = localStorage.getItem('auth');
-    if (item !== 'akcije' && item !== 'admin') {
-      this.dialog.open(PopupComponent, {position: {left:'10px', top: '10px'} });
-    }
+    this.authService.isLoggedIn$?.subscribe(x => {
+      if (!x) {
+        this.dialog.open(PopupComponent, {
+        hasBackdrop:true,
+        disableClose: true,
+        backdropClass: 'bdro'
+      });
+      }
+    })
+    
+    
+    
   }
 }

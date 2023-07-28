@@ -19,7 +19,14 @@ import { AkcijaComponent } from './components/akcija/akcija.component';
 import { AzurirajAkcijuComponent } from './components/azuriraj-akciju/azuriraj-akciju.component';
 import { NeltService } from './shared/nelt-service.service';
 import { PopupComponent } from './components/popup/popup.component';
-import { Guard } from './shared/guard';
+import { AdminGuard } from './shared/admin-guard';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
+import { provideAuth, connectAuthEmulator, getAuth } from '@angular/fire/auth';
+import { provideStorage, connectStorageEmulator, getStorage } from '@angular/fire/storage';
+import { provideFunctions, connectFunctionsEmulator, getFunctions } from '@angular/fire/functions';
+import { LoggedInGuard } from './shared/logged-in-guard';
 
 @NgModule({
   declarations: [
@@ -43,9 +50,40 @@ PopupComponent
     MatInputModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+
+      if (environment.useEmulators) {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+
+      return firestore;
+    }),
+    provideAuth(() => {
+      const auth = getAuth();
+      if (environment.useEmulators) {
+        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+      }
+      return auth;
+    }),
+    provideStorage(() => {
+      const storage = getStorage();
+      if (environment.useEmulators) {
+          connectStorageEmulator(storage, 'localhost', 9199);
+      }
+      return storage;
+    }),
+    provideFunctions(() => {
+      const functions = getFunctions();
+      if (environment.useEmulators) {
+          connectFunctionsEmulator(functions, 'localhost', 5001);
+      }
+      return functions;
+    })
   ],
-  providers: [NeltService,Guard,
+  providers: [NeltService,AdminGuard,LoggedInGuard,
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}
     },

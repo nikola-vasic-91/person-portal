@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Akcija } from 'src/app/models/akcija';
 import { NeltService } from 'src/app/shared/nelt-service.service';
 import { PopupComponent } from '../popup/popup.component';
-
+import { GrupaAkcija } from 'src/app/models/grupa-akcija';
+import { AuthService } from 'src/app/shared/auth.service';
+import { LoaderService } from 'src/app/shared/loader.service';
 
 @Component({
   selector: 'app-akcija',
@@ -19,15 +21,22 @@ export class AkcijaComponent implements OnInit {
   public availableBrendValues: string[] = [];
   
   subscription: any;
-  constructor(private neltService: NeltService, private dialog: MatDialog) { }
+  constructor(private authService: AuthService, 
+    private neltService: NeltService, 
+    private dialog: MatDialog,
+    private loadingService: LoaderService) { }
 
   ngOnInit() {
-    this.getAkcijeData();
-    const item = localStorage.getItem('auth');
-        if (item === "admin" || item === "akcije") {
-          this.selectedNavItem(true);
-
+    this.authService.isLoggedIn$?.subscribe(
+      isLoggedIn => 
+      {
+        if (isLoggedIn) {
+          this.selectedNavItem(true)
+          this.getAkcijeData();
         }
+      }
+    );
+
     this.subscription = this.neltService.getNavChangeEmitter()
       .subscribe(item => this.selectedNavItem(item));
   }
@@ -37,9 +46,12 @@ export class AkcijaComponent implements OnInit {
   }
 
   private async getAkcijeData() {
-    await this.neltService.getAkcije().subscribe(
-        a => this.akcije(a)
-        );
+    this.loadingService.setLoading(true);
+    await this.neltService.getAkcije().
+      subscribe(a => {
+        this.akcije((a[0] as GrupaAkcija).akcije);
+        this.loadingService.setLoading(false);
+      });
   }
 
   private akcije(a: Array<Akcija>) {
@@ -83,7 +95,6 @@ export class AkcijaComponent implements OnInit {
 
   public openDialog() {
     this.dialog.open(PopupComponent);
-    console.log('ssss');
   }
 }
 

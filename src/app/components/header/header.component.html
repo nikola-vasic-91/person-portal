@@ -6,8 +6,8 @@
 
             <ul class="nav navbar-nav">
                 <li><a  routerLink="/akcije">Akcije</a></li>
-                <li><a  routerLink="/azuriraj-akcije">Azuriraj akcije</a></li>
-                <li><a href="#" (click)="logout()">Odjava</a>
+                <li><a  routerLink="/azuriraj-akcije" *ngIf="authService.isAdmin$ | async">Ažuriraj akcije</a></li>
+                <li><a href="#" (click)="logout()" *ngIf="authService.isLoggedIn$ | async">Odjava</a>
                 </li>
             </ul>
     </div>
