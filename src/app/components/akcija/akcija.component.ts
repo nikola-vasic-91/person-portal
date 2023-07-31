@@ -22,7 +22,7 @@ export class AkcijaComponent implements OnInit {
   highlightedRow : Number | undefined;
   
   subscription: any;
-  constructor(private authService: AuthService, 
+  constructor(public authService: AuthService, 
     private neltService: NeltService, 
     private dialog: MatDialog,
     private loadingService: LoaderService) {}

@@ -1,4 +1,4 @@
-<div *ngIf="showTable">
+<div *ngIf="showTable && (authService.isLoggedIn$ | async)">
 <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="filterValue" (change)="applyFilter()">
     <option value="">Svi kupci</option>
     <option *ngFor="let kupacValue of availableKupacValues" [value]="kupacValue">{{ kupacValue }}</option>
