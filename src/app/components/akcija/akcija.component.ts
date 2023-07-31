@@ -19,12 +19,13 @@ export class AkcijaComponent implements OnInit {
   public brendFilterValue: string = '';
   public availableKupacValues: string[] = [];
   public availableBrendValues: string[] = [];
+  highlightedRow : Number | undefined;
   
   subscription: any;
   constructor(private authService: AuthService, 
     private neltService: NeltService, 
     private dialog: MatDialog,
-    private loadingService: LoaderService) { }
+    private loadingService: LoaderService) {}
 
   ngOnInit() {
     this.authService.isLoggedIn$?.subscribe(
@@ -92,9 +93,12 @@ export class AkcijaComponent implements OnInit {
     this.filteredData = this.akcijeData;
   }
   
-
   public openDialog() {
     this.dialog.open(PopupComponent);
+  }
+
+  public highlightRow(index: Number | undefined){
+    this.highlightedRow = index;
   }
 }
 

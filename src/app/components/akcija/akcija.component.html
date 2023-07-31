@@ -11,7 +11,7 @@
 
   <br><br>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Kupac</th>
@@ -25,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let akcija of filteredData">
+      <tr *ngFor="let akcija of filteredData; let i = index" (click)="highlightRow(i)" [class.active]="i == highlightedRow">
         <th scope="row">{{ akcija.kupac }}</th>
         <td>{{ akcija.tipAkcije }}</td>
         <td>{{ akcija.brend }}</td>
