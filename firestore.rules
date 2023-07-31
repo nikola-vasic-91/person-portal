@@ -8,7 +8,7 @@ service cloud.firestore {
 
      function isAdmin() {
         return isAuthenticated() && 'admin' in request.auth.token &&
-            request.auth.token.admin == true;
+            request.auth.token.admin == 'true';
      }
 
   match /databases/{database}/documents {

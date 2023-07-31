@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from './components/popup/popup.component';
 import { AuthService } from './shared/auth.service';
+import { Performance } from '@angular/fire/performance';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { AuthService } from './shared/auth.service';
 export class AppComponent {
   constructor(private dialog: MatDialog, public authService: AuthService) {
   }
-
+  private performance: Performance = inject(Performance)
   ngOnInit(): void {
     this.authService.isLoggedIn$?.subscribe(x => {
       if (!x) {
