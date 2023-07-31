@@ -9,7 +9,7 @@ import { AuthService } from './shared/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private dialog: MatDialog, private authService: AuthService) {
+  constructor(private dialog: MatDialog, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -22,8 +22,9 @@ export class AppComponent {
       });
       }
     })
-    
-    
-    
+  }
+
+  async logout() {
+      await this.authService.logout();
   }
 }

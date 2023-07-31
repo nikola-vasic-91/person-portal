@@ -27,6 +27,10 @@ import { provideAuth, connectAuthEmulator, getAuth } from '@angular/fire/auth';
 import { provideStorage, connectStorageEmulator, getStorage } from '@angular/fire/storage';
 import { provideFunctions, connectFunctionsEmulator, getFunctions } from '@angular/fire/functions';
 import { LoggedInGuard } from './shared/logged-in-guard';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ PopupComponent
     MatFormFieldModule,
     MatDialogModule,
     MatButtonModule,
+    MatListModule,
+    MatToolbarModule,
     MatInputModule,
+    MatIconModule,
+    MatSidenavModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatCardModule,
@@ -75,13 +83,13 @@ PopupComponent
       }
       return storage;
     }),
-    provideFunctions(() => {
-      const functions = getFunctions();
-      if (environment.useEmulators) {
-          connectFunctionsEmulator(functions, 'localhost', 5001);
-      }
-      return functions;
-    })
+    // provideFunctions(() => {
+    //   const functions = getFunctions();
+    //   if (environment.useEmulators) {
+    //       connectFunctionsEmulator(functions, 'localhost', 5001);
+    //   }
+    //   return functions;
+    // })
   ],
   providers: [NeltService,AdminGuard,LoggedInGuard,
     {

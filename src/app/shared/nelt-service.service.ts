@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Akcija } from './../models/akcija';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
-import { collection, collectionData, Firestore, addDoc, Timestamp, orderBy, query } from '@angular/fire/firestore';
+import { collection, collectionData, Firestore, addDoc, Timestamp, orderBy, query, limit } from '@angular/fire/firestore';
 
 @Injectable()
 export class NeltService {
@@ -24,7 +24,7 @@ export class NeltService {
   }
 
   getAkcije() {
-    const ref = query(collection(this.db, 'akcije'), orderBy('timestamp', 'desc'));
+    const ref = query(collection(this.db, 'akcije'), orderBy('timestamp', 'desc'), limit(1));
     return collectionData(ref);
   }
 
