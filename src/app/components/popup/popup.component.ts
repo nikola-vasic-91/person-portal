@@ -15,10 +15,8 @@ export class PopupComponent implements OnInit {
   ngOnInit(): void {}
 
   async submit() {
-    if (this.username === "neltakcije" || this.username === "neltadmin") {
-      this.username = this.username + "@nelt.com";
-    }
-    await this.userService.login(this.username, this.password);
+    await this.userService.login(this.username === "neltakcije" || this.username === "neltadmin" ? this.username + "@nelt.com"
+    : this.username, this.password);
   }
 
   @HostListener('window:keyup.Enter', ['$event'])
