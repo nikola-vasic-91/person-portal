@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgToastModule } from 'ng-angular-popup';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +24,6 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
 import { provideAuth, connectAuthEmulator, getAuth } from '@angular/fire/auth';
 import { provideStorage, connectStorageEmulator, getStorage } from '@angular/fire/storage';
-import { provideFunctions, connectFunctionsEmulator, getFunctions } from '@angular/fire/functions';
 import { LoggedInGuard } from './shared/logged-in-guard';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
@@ -36,7 +34,6 @@ import { getPerformance, providePerformance } from '@angular/fire/performance';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     SpinnerComponent,
     AkcijaComponent,
     AzurirajAkcijuComponent,
@@ -85,13 +82,6 @@ PopupComponent
       return storage;
     }),
     providePerformance(() => getPerformance())
-    // provideFunctions(() => {
-    //   const functions = getFunctions();
-    //   if (environment.useEmulators) {
-    //       connectFunctionsEmulator(functions, 'localhost', 5001);
-    //   }
-    //   return functions;
-    // })
   ],
   providers: [NeltService,AdminGuard,LoggedInGuard,
     {
